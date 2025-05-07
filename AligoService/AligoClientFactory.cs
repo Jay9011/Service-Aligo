@@ -32,5 +32,22 @@ namespace AligoService
             var httpClientWrapper = new AligoHttpClient(httpClient);
             return new AligoClient(httpClientWrapper, configuration);
         }
+
+        /// <summary>
+        /// 알리고 클라이언트를 Configuration을 사용해 생성합니다
+        /// </summary>
+        /// <param name="configuration">알리고 계정 설정</param>
+        /// <param name="httpClient">HTTP 클라이언트 (선택적)</param>
+        /// <returns>알리고 클라이언트</returns>
+        /// <exception cref="ArgumentNullException">설정이 잘못 됨</exception>
+        public static IAligoClient Create(IAligoConfiguration configuration, HttpClient httpClient = null)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+            var httpClientWrapper = new AligoHttpClient(httpClient);
+            return new AligoClient(httpClientWrapper, configuration);
+        }
     }
 }

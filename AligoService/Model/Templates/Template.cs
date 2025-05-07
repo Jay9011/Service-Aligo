@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace AligoService.Model.Templates
 {
@@ -62,6 +63,30 @@ namespace AligoService.Model.Templates
         /// 코멘트 목록
         /// </summary>
         [JsonProperty("comments")]
-        public List<string> Comments { get; set; } = new List<string>();
+        public JArray Comments { get; set; } = new JArray();
+
+        [JsonIgnore]
+        public List<string> CommentStrings
+        {
+            get
+            {
+                var result = new List<string>();
+                if (Comments != null)
+                {
+                    foreach (var comment in Comments)
+                    {
+                        if (comment.Type == JTokenType.String)
+                        {
+                            result.Add(comment.ToString());
+                        }
+                        else
+                        {
+                            result.Add(comment.ToString(Formatting.None));
+                        }
+                    }
+                }
+                return result;
+            }
+        }
     }
 }
