@@ -35,6 +35,11 @@ namespace AligoService.Model
         public Dictionary<string, string> Variables { get; set; } = new Dictionary<string, string>();
 
         /// <summary>
+        /// 쿼리 문자열 변수 딕셔너리
+        /// </summary>
+        public Dictionary<string, string> QueryVariables { get; set; } = new Dictionary<string, string>();
+
+        /// <summary>
         /// 실패시 문자 제목
         /// </summary>
         public string FailoverSubject { get; set; }

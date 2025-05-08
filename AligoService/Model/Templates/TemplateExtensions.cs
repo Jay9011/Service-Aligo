@@ -34,6 +34,28 @@ namespace AligoService.Model.Templates
         }
 
         /// <summary>
+        /// 쿼리 문자열 템플릿의 변수를 치환합니다.
+        /// </summary>
+        /// <param name="template">변수가 포함된 템플릿 문자열(템플릿 컨텐츠)</param>
+        /// <param name="queryVariables">변수명과 값을 담은 딕셔너리</param>
+        /// <returns>변수가 치환된 문자열</returns>
+        public static string ReplaceQueryString(this string template, Dictionary<string, string> queryVariables)
+        {
+            if (string.IsNullOrEmpty(template))
+                return template;
+
+            if (queryVariables == null || queryVariables.Count == 0)
+                return template;
+
+            string result = template;
+            foreach (var variable in queryVariables)
+            {
+                result = result.Replace($"#{{{variable.Key}}}", variable.Value);
+            }
+            return result;
+        }
+
+        /// <summary>
         /// 템플릿 텍스트에서 변수 목록을 추출합니다.
         /// </summary>
         /// <param name="template">변수가 포함된 템플릿 문자열</param>

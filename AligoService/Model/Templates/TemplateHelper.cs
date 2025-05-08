@@ -60,7 +60,7 @@ namespace AligoService.Model.Templates
                     Receiver = receiver.Phone,
                     ReceiverName = receiver.Name,
                     Subject = receiver.Subject,
-                    Message = receiver.TemplateContent.ReplaceVariables(receiver.Variables),
+                    Message = receiver.TemplateContent.ReplaceVariables(receiver.Variables).ReplaceQueryString(receiver.QueryVariables),
                     FailoverSubject = receiver.FailoverSubject,
                     FailoverMessage = receiver.FailoverMessage ?? receiver.TemplateContent.ReplaceVariables(receiver.Variables)
                 };
